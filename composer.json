@@ -14,10 +14,10 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.0",
-        "illuminate/support": "^5.4",
-        "illuminate/routing": "^5.4",
-        "illuminate/http": "^5.4",
-        "illuminate/database": "^5.4",
+        "illuminate/support": "^5.2",
+        "illuminate/routing": "^5.2",
+        "illuminate/http": "^5.2",
+        "illuminate/database": "^5.2",
         "baum/baum": "^1.1"
     },
     "autoload": {
