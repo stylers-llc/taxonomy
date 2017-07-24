@@ -1,0 +1,28 @@
+{
+    "name": "stylers-llc/taxonomy",
+    "description": "Taxonomy system for Laravel",
+    "license": "MIT",
+    "keywords": [
+        "laravel", "taxonomy"
+    ],
+    "authors": [
+        {
+            "name": "Nasztanovics Dávid",
+            "email": "dnasztanovics@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0",
+        "illuminate/support": "^5.4",
+        "illuminate/routing": "^5.4",
+        "illuminate/http": "^5.4",
+        "illuminate/database": "^5.4",
+        "baum/baum": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stylers\\Taxonomy\\" : "src/"
+        }
+    }
+}
