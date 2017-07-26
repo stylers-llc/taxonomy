@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Stylers\Taxonomy\Controllers;
+namespace Stylers\Taxonomy\Controllers;
 
 
 use Illuminate\Http\Request;
