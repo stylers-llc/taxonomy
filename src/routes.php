@@ -1,9 +1,9 @@
 <?php
 
 Route::group([
-    'middleware' => ['cors', 'jwt.auth', 'role:admin'],
+    'middleware' => ['web'],
     'prefix' => 'stylerstaxonomy',
-    'namespace' => 'Modules\Stylers\Taxonomy\Controllers'
+    'namespace' => 'Stylers\Taxonomy\Controllers'
 ], function () {
     Route::resource('/description', 'DescriptionController', ['except' => ['show', 'index']]);
 
@@ -12,9 +12,9 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => ['cors', 'jwt.auth'],
+    'middleware' => ['web'],
     'prefix' => 'stylerstaxonomy',
-    'namespace' => 'Modules\Stylers\Taxonomy\Controllers'
+    'namespace' => 'Stylers\Taxonomy\Controllers'
 ], function () {
     Route::resource('/description', 'DescriptionController', ['only' => ['show', 'index']]);
 
