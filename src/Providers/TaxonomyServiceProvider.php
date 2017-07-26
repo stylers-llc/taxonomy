@@ -23,10 +23,10 @@ class TaxonomyServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('taxonomy.php'),
+            __DIR__.'/../../config/config.php' => config_path('taxonomy.php'),
         ]);
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'taxonomy'
+            __DIR__.'/../../config/config.php', 'taxonomy'
         );
     }
 
@@ -58,8 +58,5 @@ class TaxonomyServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->publishDatabase();
         $this->bootRoutes();
-
-        // Register commands
-        $this->commands('command.taxonomy.migration');
     }
 }
