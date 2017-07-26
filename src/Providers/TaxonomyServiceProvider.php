@@ -59,4 +59,14 @@ class TaxonomyServiceProvider extends ServiceProvider
         $this->publishDatabase();
         $this->bootRoutes();
     }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        
+    }
 }
