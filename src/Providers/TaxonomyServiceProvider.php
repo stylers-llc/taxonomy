@@ -33,11 +33,11 @@ class TaxonomyServiceProvider extends ServiceProvider
     protected function publishDatabase()
     {
         $this->publishes([
-            __DIR__ . '/../../database/migrations/' => database_path('/migrations')
+            __DIR__ . '/../../database/Migrations/' => database_path('/migrations')
         ], 'migrations');
 
         $this->publishes([
-            __DIR__ . '/../../database/seeds/' => database_path('/seeds')
+            __DIR__ . '/../../database/Seeders/' => database_path('/seeds')
         ], 'seeds');
     }
 
@@ -67,6 +67,6 @@ class TaxonomyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
+
     }
 }
