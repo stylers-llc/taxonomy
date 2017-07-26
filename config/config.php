@@ -22,23 +22,9 @@ return [
             'time_format' => 'MM/DD/YYYY h:mmA',
             'first_day_of_week' => 'sunday',
             'translations' => [
-                'hu' => 'Angol',
                 'en' => 'English'
             ]
-        ],
-        'hungarian' => [
-            'id' => 3,
-            'language_id' => 2,
-            'iso_code' => 'hu',
-            'culture_name' => 'hu-HU',
-            'date_format' => 'YYYY.MM.DD.',
-            'time_format' => 'YYYY.MM.DD. H:mm',
-            'first_day_of_week' => 'monday',
-            'translations' => [
-                'hu' => 'Magyar',
-                'en' => 'Hungarian'
-            ]
-        ],
+        ]
     ],
     'default_language' => 'english',
     'relation' => 201, # Range 200 - 250
