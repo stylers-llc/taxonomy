@@ -50,12 +50,12 @@ class CreateTaxonomiesTable extends Migration
             $table->softdeletes();
         });
 
-        /** For postgreSql
-         * Illuminate\Support\Facades\DB::statement('ALTER SEQUENCE taxonomies_id_seq RESTART WITH 10000');
-         */
 
-        /** For mySql */
-        Illuminate\Support\Facades\DB::statement('ALTER TABLE taxonomies AUTO_INCREMENT=10000');
+        if (\DB::getDriverName() == "PDO_PGSQL") {
+            Illuminate\Support\Facades\DB::statement('ALTER SEQUENCE taxonomies_id_seq RESTART WITH 10000');
+        } else if (\DB::getDriverName() == "PDO_MYSQL") {
+            Illuminate\Support\Facades\DB::statement('ALTER TABLE '.\DB::getTablePrefix().'taxonomies AUTO_INCREMENT=10000');
+        }
     }
 
     /**
