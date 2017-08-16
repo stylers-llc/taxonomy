@@ -212,7 +212,14 @@ class Taxonomy extends Node
         $tx->setConnection($database);
         return $tx->where(['name' => $name, 'parent_id' => $parent_id])->firstOrFail();
     }
-
+    
+    static public function getTaxonomyById($id, $parent_id, $database = null)
+    {
+        $tx = new Taxonomy();
+        $tx->setConnection($database);
+        return $tx->where(['id' => $id, 'parent_id' => $parent_id])->firstOrFail();
+    }
+    
     static public function getTaxonomyOfGranny($name, $grandparent_id, $database = null)
     {
         $tx = new Taxonomy();
