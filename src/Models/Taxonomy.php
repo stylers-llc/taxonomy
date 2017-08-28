@@ -5,7 +5,6 @@ namespace Stylers\Taxonomy\Models;
 
 
 use Baum\Node;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\MessageBag;
 
@@ -235,7 +234,7 @@ class Taxonomy extends Node
     {
         try {
             return self::getTaxonomy($name, $parentTxId, $database);
-        } catch (ModelNotFoundException $e) {
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             $tx = new Taxonomy();
             $tx->setConnection($database);
             $tx->name = $name;

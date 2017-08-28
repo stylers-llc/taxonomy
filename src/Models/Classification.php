@@ -13,7 +13,7 @@ class Classification extends Model
 
     public function classificationTaxonomy()
     {
-        return $this->hasOne(Taxonomy::class, 'id', 'classification_taxonomy_id');
+        return $this->hasOne(Taxonomy::class, 'id', 'taxonomy_id');
     }
 
     public function value()

@@ -11,7 +11,7 @@ trait ClassificationTrait
 {
     public function classificationTaxonomy()
     {
-        return $this->hasOne(Taxonomy::class, 'id', 'classification_taxonomy_id');
+        return $this->hasOne(Taxonomy::class, 'id', 'taxonomy_id');
     }
 
     public function valueTaxonomy()
@@ -41,14 +41,14 @@ trait ClassificationTrait
     public function getClassification($columnName, $objectId, $classificationTaxonomyId)
     {
         return call_user_func(array(get_class($this), 'where'), [[$columnName, $objectId]])
-            ->where('classification_taxonomy_id', $classificationTaxonomyId)->first();
+            ->where('taxonomy_id', $classificationTaxonomyId)->first();
     }
 
     public function getClassificationWithTrashed($columnName, $objectId, $classificationTaxonomyId)
     {
         return call_user_func(array(get_class($this), 'withTrashed'), [])
             ->where($columnName, $objectId)
-            ->where('classification_taxonomy_id', $classificationTaxonomyId)
+            ->where('taxonomy_id', $classificationTaxonomyId)
             ->first();
     }
 
@@ -78,11 +78,11 @@ trait ClassificationTrait
                     $data['value'] = $classification->valueTaxonomy->name;
                 }
 
-                if ($classification->additional_description_id) {
+                if (!empty($classification->additional_description_id)) {
                     $data['description'] = (new DescriptionEntity($classification->additionalDescription))->getFrontendData();
                 }
 
-                if (isset($classification->is_highlighted)) {
+                if (!empty($classification->is_highlighted)) {
                     $data['highlighted'] = $classification->is_highlighted;
                 }
 
@@ -108,7 +108,7 @@ trait ClassificationTrait
 
         $newClassification = new self();
         $newClassification->{$columnName} = $objectId;
-        $newClassification->classification_taxonomy_id = $nameTxId;
+        $newClassification->taxonomy_id = $nameTxId;
         $newClassification->value_taxonomy_id = $valueTxId;
         $newClassification->setConnection($this->getConnectionName());
         $newClassification->saveOrFail();

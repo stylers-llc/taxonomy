@@ -18,12 +18,12 @@ trait ClassificableTrait
             throw new UserException('Invalid classification value.');
         }
 
-        $old = $this->classifications()->where('classification_taxonomy_id', $classificationTxId)->first();
+        $old = $this->classifications()->where('taxonomy_id', $classificationTxId)->first();
 
         $classificationClass = $this->getClassificationClassName();
         $classification = new $classificationClass([
             $this->getModelIdNameinClassification() => $this->id,
-            'classification_taxonomy_id' => $classificationTxId,
+            'taxonomy_id' => $classificationTxId,
             'value_taxonomy_id' => $valueTxId
         ]);
         if (!is_null($old)) {
@@ -43,7 +43,7 @@ trait ClassificableTrait
      */
     public function getClassification($classificationTxId)
     {
-        $classificationData = $this->classifications()->where('classification_taxonomy_id',
+        $classificationData = $this->classifications()->where('taxonomy_id',
             $classificationTxId)->first();
 
         if (!$classificationData) {
