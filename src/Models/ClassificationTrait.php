@@ -103,6 +103,7 @@ trait ClassificationTrait
             }
             $classification->value_taxonomy_id = $valueTxId;
             $classification->setConnection($this->getConnectionName());
+            $classification->save();
             return $classification;
         }
 
