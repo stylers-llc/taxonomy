@@ -2,6 +2,7 @@
     "name": "stylers/taxonomy",
     "description": "Taxonomy system for Laravel",
     "license": "MIT",
+    "type": "project",
     "keywords": [
         "laravel", "taxonomy"
     ],
