@@ -78,6 +78,23 @@ class TaxonomyEntity
         return $return;
     }
 
+    public function getTranslationData(array $additions = [])
+    {
+        if (is_null($this->taxonomy)) {
+            return null;
+        }
+
+        $translations = $this->getTranslations();
+        $translations[Language::getDefaultLanguageCode()] = $this->taxonomy->name;
+
+        $return = [
+            'id' => $this->taxonomy->id,
+            'translations' => $translations
+        ];
+
+        return $return;
+    }
+
     public function translations()
     {
         $taxonomies = [Language::getDefault()->iso_code => $this->taxonomy->name];
