@@ -5,6 +5,7 @@ namespace Stylers\Taxonomy\Models;
 
 
 use Baum\Node;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\MessageBag;
 
@@ -175,7 +176,8 @@ class Taxonomy extends Node
         return $this->taxonomyRelation;
     }
 
-    public function getOptions() {
+    public function getOptions()
+    {
         $children = $this->getChildren();
 
         $options = [];
@@ -211,14 +213,14 @@ class Taxonomy extends Node
         $tx->setConnection($database);
         return $tx->where(['name' => $name, 'parent_id' => $parent_id])->firstOrFail();
     }
-    
+
     static public function getTaxonomyById($id, $parent_id, $database = null)
     {
         $tx = new Taxonomy();
         $tx->setConnection($database);
         return $tx->where(['id' => $id, 'parent_id' => $parent_id])->firstOrFail();
     }
-    
+
     static public function getTaxonomyOfGranny($name, $grandparent_id, $database = null)
     {
         $tx = new Taxonomy();
@@ -259,5 +261,15 @@ class Taxonomy extends Node
         }
         $taxonomy->setConnection($database);
         return $taxonomy;
+    }
+
+    static public function isUnique(string $name, int $parent): bool
+    {
+        try {
+            Taxonomy::getTaxonomy($name, $parent);
+            return false;
+        } catch (ModelNotFoundException $exception) {
+            return true;
+        }
     }
 }
