@@ -42,7 +42,9 @@ class DescriptionSetter
         $languageIdsToKeep = [];
 
         $description = $this->getDescription();
-        if (isset($this->translations[$defaultLanguage->iso_code])) {
+        if (isset($this->translations[$defaultLanguage->iso_code])
+            && !is_null($this->translations[$defaultLanguage->iso_code])
+        ) {
             $description->description = $this->translations[$defaultLanguage->iso_code];
         }
         if (empty($this->translations)) {

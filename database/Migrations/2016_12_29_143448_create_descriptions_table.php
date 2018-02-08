@@ -15,7 +15,7 @@ class CreateDescriptionsTable extends Migration
     {
         Schema::create('descriptions', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
