@@ -62,8 +62,10 @@ class DescriptionSetter
             if (!isset($languageCodes[$languageCode])) {
                 throw new \Exception("Invalid language code: `{$languageCode}`");
             }
-            $this->setDescriptionTranslation($description->id, $languageCodes[$languageCode], $translation);
-            $languageIdsToKeep[] = $languageCodes[$languageCode];
+            if (!is_null($translation)) {
+                $this->setDescriptionTranslation($description->id, $languageCodes[$languageCode], $translation);
+                $languageIdsToKeep[] = $languageCodes[$languageCode];
+            }
         }
         $this->clearDescriptionTranslations($description->id, $languageIdsToKeep);
 

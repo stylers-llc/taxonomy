@@ -60,8 +60,10 @@ class TaxonomySetter
             if (!isset($languageCodes[$languageCode])) {
                 throw new \Exception("Invalid language code: `{$languageCode}`");
             }
-            $this->setTaxonomyTranslation($taxonomy->id, $languageCodes[$languageCode], $translation);
-            $languageIdsToKeep[] = $languageCodes[$languageCode];
+            if (!is_null($translation)) {
+                $this->setTaxonomyTranslation($taxonomy->id, $languageCodes[$languageCode], $translation);
+                $languageIdsToKeep[] = $languageCodes[$languageCode];
+            }
         }
         $this->clearTaxonomyTranslations($taxonomy->id, $languageIdsToKeep);
 
