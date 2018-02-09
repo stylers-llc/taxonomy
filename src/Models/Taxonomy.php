@@ -263,10 +263,11 @@ class Taxonomy extends Node
         return $taxonomy;
     }
 
-    static public function isUnique(string $name, int $parent): bool
+    static public function isUnique(string $name, int $parent, int $id = null): bool
     {
         try {
-            Taxonomy::getTaxonomy($name, $parent);
+            $taxonomy = Taxonomy::getTaxonomy($name, $parent);
+            if ($taxonomy->id == $id) return true;
             return false;
         } catch (ModelNotFoundException $exception) {
             return true;
