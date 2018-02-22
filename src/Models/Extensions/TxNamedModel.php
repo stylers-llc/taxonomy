@@ -25,4 +25,6 @@ class TxNamedModel extends Model
 
         return $model;
     }
+
+
 }
