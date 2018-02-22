@@ -12,6 +12,12 @@ class TxNamedModel extends Model
         return $this->hasOne(Taxonomy::class, 'id', 'name_tx_id');
     }
 
+    public function getName()
+    {
+        $model = $this->name;
+        return $model ? $model->name : null;
+    }
+
     public static function findByName(string $name, int $parent_id)
     {
         $taxonomy = Taxonomy::getTaxonomy($name, $parent_id);
