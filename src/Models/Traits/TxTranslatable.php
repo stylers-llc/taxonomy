@@ -17,7 +17,7 @@ trait TxTranslatable
         if ($defaultCode == $code) $translation = $this->{$column};
         else $translation = $this->getTranslation($column, $code);
 
-        return $translation->name;
+        return $translation ? $translation->name : null;
     }
 
     protected function validateTranslationColumn(string $column)
