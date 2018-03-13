@@ -8,11 +8,13 @@ use Stylers\Taxonomy\Models\Taxonomy;
 
 trait TxTranslatable
 {
-    public function translate(string $column, string $code)
+    public function translate(string $column, string $code = null)
     {
 //        $this->validateTranslationColumn($column);
         if (get_class($this->{$column}) !== Taxonomy::class) return null;
+
         $defaultCode = Language::getDefaultLanguageCode();
+        if (is_null($code)) $code = $defaultCode;
 
         if ($defaultCode == $code) $translation = $this->{$column};
         else $translation = $this->getTranslation($column, $code);
@@ -36,7 +38,20 @@ trait TxTranslatable
                 $query->where('languages.iso_code', $code);
             })
             ->first();
-
         return $translation;
+    }
+
+//    TODO
+    public function translateOption(string $column, string $code = null)
+    {
+//        $this->validateTranslationColumn($column);
+        if (get_class($this->{$column}) !== Taxonomy::class) return null;
+
+        $defaultCode = Language::getDefaultLanguageCode();
+        if (is_null($code)) $code = $defaultCode;
+
+        $translation = $this->getTranslation($column, $code);
+
+        return $translation ? $translation->name : null;
     }
 }
