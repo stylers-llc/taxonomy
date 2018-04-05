@@ -38,10 +38,10 @@ class TaxonomyTranslation extends Model
      */
     public static function isUnique(int $parentId = null, string $name, int $id = null): bool
     {
-        $hasTranslation = self::whereHas('taxonomy', function ($query) use ($parentId) {
+        $hasTranslations = (bool)self::whereHas('taxonomy', function ($query) use ($parentId) {
             $query->where('parent_id', $parentId);
         })->where('name', $name)->where('id', '!=', $id)->count();
 
-        return !$hasTranslation;
+        return !$hasTranslations;
     }
 }
