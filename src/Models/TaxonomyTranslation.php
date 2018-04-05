@@ -30,4 +30,18 @@ class TaxonomyTranslation extends Model
         return $txTr->where(['taxonomy_id' => $taxonomyId, 'language_id' => $languageId])->firstOrFail();
     }
 
+    /**
+     * @param int|null $parentId
+     * @param string $name
+     * @param int|null $id
+     * @return bool
+     */
+    public static function isUnique(int $parentId = null, string $name, int $id = null): bool
+    {
+        $hasTranslation = self::whereHas('taxonomy', function ($query) use ($parentId) {
+            $query->where('parent_id', $parentId);
+        })->where('name', $name)->where('id', '!=', $id)->count();
+
+        return !$hasTranslation;
+    }
 }
