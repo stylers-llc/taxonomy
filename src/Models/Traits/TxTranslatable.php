@@ -10,14 +10,21 @@ trait TxTranslatable
 {
     public function translate(string $column, string $code = null)
     {
-//        $this->validateTranslationColumn($column);
-        if (get_class($this->{$column}) !== Taxonomy::class) return null;
+//        $this->validateTranslationColumn($column);      
+        if (is_null($this->{$column} || get_class($this->{$column}) !== Taxonomy::class) {
+            return null;
+        }
 
         $defaultCode = Language::getDefaultLanguageCode();
-        if (is_null($code)) $code = $defaultCode;
+        if (is_null($code)) {
+            $code = $defaultCode;
+        }
 
-        if ($defaultCode == $code) $translation = $this->{$column};
-        else $translation = $this->getTranslation($column, $code);
+        if ($defaultCode == $code) {
+            $translation = $this->{$column};
+        } else {
+            $translation = $this->getTranslation($column, $code);
+        }
 
         return $translation ? $translation->name : null;
     }
