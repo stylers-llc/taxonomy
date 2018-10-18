@@ -11,7 +11,7 @@ trait TxTranslatable
     public function translate(string $column, string $code = null)
     {
 //        $this->validateTranslationColumn($column);      
-        if (is_null($this->{$column} || get_class($this->{$column}) !== Taxonomy::class) {
+        if (is_null($this->{$column}) || get_class($this->{$column}) !== Taxonomy::class) {
             return null;
         }
 
@@ -31,13 +31,17 @@ trait TxTranslatable
 
     protected function validateTranslationColumn(string $column)
     {
-        if (get_class($this->{$column}) !== Taxonomy::class) {
+        if (is_null($this->{$column}) || get_class($this->{$column}) !== Taxonomy::class) {
             throw new BadMethodCallException('Not a Taxonomy: ' . $column);
         }
     }
 
     protected function getTranslation(string $column, string $code)
     {
+        if(is_null($this->{$column})) {
+            return null;
+        }
+            
         $translation = $this
             ->{$column}
             ->translations()
@@ -52,7 +56,7 @@ trait TxTranslatable
     public function translateOption(string $column, string $code = null)
     {
 //        $this->validateTranslationColumn($column);
-        if (get_class($this->{$column}) !== Taxonomy::class) return null;
+        if (is_null($this->{$column}) || get_class($this->{$column}) !== Taxonomy::class) return null;
 
         $defaultCode = Language::getDefaultLanguageCode();
         if (is_null($code)) $code = $defaultCode;
